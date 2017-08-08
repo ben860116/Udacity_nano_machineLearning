@@ -824,9 +824,10 @@ uSy5GuPxEuwluOFX3VV1QsAhmRLMkqsxUUSkNFBdVRfZOFazNyy5GmOMD6xDyxhjfGDJ1RhjfGDJ
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>based on the heatmap above,</p>
-<p>Customer1,index 5:  majourity purchase are fresh milk,detegent and delicatessen,very few frozen, I would say its a fresh food resturant,not a chain with a lot of frozen product.</p>
-<p>Customer2,index 10 :  very few fresh, but a lot of frozen and grocery,I think its more like a diner or cafe.</p>
-<p>Customer3,index 175 :  almost no frozen, very few fresh, a lot of milk and grocery, probably a cafe.</p>
+<p>Customer1,index 5:</p>
+<p>majourity purchase are fresh milk(percentile 80%, much more than mean and median value),detegent/paper and delicatessen(percentile more than 60%),very few frozen product (percentile 24%, less than mean and median), I would say its a fresh food resturant,not a chain with a lot of frozen product.</p>
+<p>Customer2,index 10 :  high percentile on Grocery, frozen detergents and paper (percentile more than 80%), very few fresh (27%), i think it is a fast food chain .</p>
+<p>Customer3,index 175 :  almost no frozen(percentile 1.6%), very few fresh(18%), a lot of milk and grocery(about 79-80%), probably a cafe.</p>
 
 </div>
 </div>
@@ -2422,6 +2423,7 @@ AABmKJYAAABm/AFZ8RnxpvbpmwAAAABJRU5ErkJggg==
 <p><strong>Answer:</strong></p>
 <p>Grocery and Detergents_paper  are some degree of correlated, this is confirmed that I could not identify the spending habit by these features.</p>
 <p>the features shows a linear relation, not normally distributed.</p>
+<p>The data skew toward to left corner near 0, very similar to lognormal distribution.</p>
 
 </div>
 </div>
@@ -6652,6 +6654,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
 yes, points on index 65,66,75,128,154    are considered outliers for more than one feature.</p>
+<p>It is resonable to remove these outliers, since it does not add any value but noise, and skewed the data.</p>
 
 </div>
 </div>
@@ -7030,11 +7033,10 @@ vCd7pBwAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>the total variance of first and second pricipal is 0.7252, the first four is 0.9279</p>
-<p>The first component captures milk, grocery, detergents and paper, and delicatessen, weighted more on detergents and paper,its heavily weighted on detergents and paper, could capature the information related to this category.</p>
-<p>The second component captures on everything but detergents and paper, its on the oppisite side of first component, its focus on fresh and frozen. 
-the first and second principle componts shows more than 90 percent of variance</p>
-<p>The third compent shows variance shows customer bought milk frozen and delicatessen, no fresh, its very likely to represent the meat and processed food eater.</p>
-<p>The fourth shows everything but frozen and detergents and paper, represent the group of eating fresh, protain but fast food, frozen/microwave processed food.</p>
+<p>The difference between the first dimension and the rest is detergents and paper weighted positively , the rest are not. So the first dimension could help to represent spending on packaged consumed product,or a convinence store without  a lot of fresh and frozen product.</p>
+<p>Dimension 2 can differenciate spending from dimension 1 on weighted positively on  fresh and frozen, not on detergent and paper, it could be a resturant who is using a lot of fresh, frozen and meat.</p>
+<p>Dimension 3 respresent by a strong positive correlation with t delicatessen and a strong negtive correlation on fresh, it could represent vegetarian and protein diets.</p>
+<p>Dimension 4, strongly negatively related to frozen, posively related to fresh and delicatessen, it represet fresh food resturant , non chain fast food.</p>
 
 </div>
 </div>
@@ -8299,7 +8301,7 @@ SUVORK5CYII=
 <p>K-means is a hard assgin number of clusters, if one points belong to one cluster then it does not belong to the other. 
 On the other hand GMM is soft assignment, one point may 10% belong to cluster one and 20% belong to cluster 2, the clusters can be overlapped. 
 K-means is faster and easy to interpret,GMM is not.</p>
-<p>From the observatons, the clusters seems to be independent with each other, I will use K-Means.</p>
+<p>From the observatons, the clusters is not overlap  with each other, I will use K-Means.</p>
 
 </div>
 </div>
@@ -9286,8 +9288,10 @@ ABBZBDwAAAAAIouABwAAAEBkEfAAAAAAiCwCHgAAAACR9f8BuAVMkEGCnOcAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Compare the two segments, segment 0 is positive affected by milk grocery and detergents paper, it could be a retail shop or  grocery store</p>
-<p>The segment 1 is more affected by fresh and frozen, more like a resturant.</p>
+<p>to calculate the true center above, segment 0 : milk, grocery and detergents_paper &gt; 0 and has bigger difference with segment 1, fresh &lt;0 with big difference with segment 1. 
+The differece of the two segments from their centers are segment 0 are positively affected by milk grocery and detergents paper, segment1 is negatively affected, segment 1 is positively  affected by fresh and frozen.</p>
+<p>Compare the two segments, segment 0 could be a retail shop or  grocery store</p>
+<p>The segment 1 is  more like a resturant.</p>
 
 </div>
 </div>
@@ -9709,10 +9713,12 @@ uSy5GuPxEuwluOFX3VV1QsAhmRLMkqsxUUSkNFBdVRfZOFazNyy5GmOMD6xDyxhjfGDJ1RhjfGDJ
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong></p>
+<p><strong>Answer:</strong>
+My prediction is segment 1 is a resturant and segment 0 is retail or grocery shop.</p>
 <p>From the prediction above, the affection would be differnt on differnt business.
 decrease the frequency of delivery would affect more on a resturant especially for fresh product. 
 may not affect that much on groceries.</p>
+<p>The AB test should be set based on the two customer segments, high frequency and small delivery to resturant and large truch with less frequent to the retail/grocery store.</p>
 
 </div>
 </div>
@@ -10399,7 +10405,8 @@ CC0CDwAAAIDQIvAAAAAACC0CDwAAAIDQ+v/vJBT/gLffNgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-customer 0 is both red and green(maybe not purly classified by the distribution, but based on the model , now it classiied to segment 0.</p>
+customer 0 is both red and green(maybe not purly classified by the distribution, but based on the model , now it classiied to segment 0.
+Customer 1 and 2 can be purely defined as Retailer.</p>
 <p>The classification are consistent.</p>
 
 </div>
